@@ -31,25 +31,6 @@ for user in registeredUser_L :
      registeredUser += user+"|"
 
 
-"""
-#old registering
-currentUser = input("Username : ")
-while currentUser not in database:
-    print("Invalid username")
-    currentUser = input("Username : ")
-
-#Password checking
-while True:
-    test_mdp = getpass.getpass("Password for " + currentUser + " user : ")
-    if test_mdp != database[currentUser]:
-        print("Password doesn't match user :" + currentUser)
-        time.sleep(.5)
-        pass
-    else :
-        break
-"""
-
-
 while True:
     print(f"\n{registeredUser}")
     currentUser = input("Username \n> ")
