@@ -1,28 +1,26 @@
-from cryptage import crypt
+# uku seal of approval™ :D
 
+import hashlib
 import getpass
 import time
 import sys
 
 
-crypted = "c_database"
-uncrypted = "database"
+#var
+file = "database"
 
-key = "SuperVoltan69"
-
-crypt(crypted,uncrypted,key)
-
-#creating dictionary user->passwd
+#creating dictionary user->passwd and keeping track of users in the file
 database = {}
-registeredUser_L = []
+userList = []
 
-with open(uncrypted, "r") as ofp:
+
+
+with open(file, "r") as ofp:
     for line in ofp:
         user,passwd = line.split("@")
         database[user] = passwd.replace("\n", "")
         userList.append(user)
 
-crypt(uncrypted,crypted,key)
 
 
 registeredUser = "Registered users |"
@@ -31,18 +29,19 @@ for user in userList :
 
 #^^^^^^^^^^^^^^^^^^^am satisfied until there^^^^^^^^^^^^^^^^^^^
 
+#registering needs to be redone
 while True:
     print(f"\n{registeredUser}")
     currentUser = input("Username \n> ")
     if currentUser in database:
-        test_mdp = getpass.getpass(f"Password for {currentUser} \n> ")
-        if test_mdp == database[currentUser]:
+        testPasswd = getpass.getpass(f"Password for {currentUser} \n> ")
+        hashTestPasswd = hashlib.sha224(testPasswd.encode("utf8")).hexdigest()
+        if hashTestPasswd == database[currentUser]:
             break
         else:
             print("Incorrect password, back to username")
     else:
         print("Invalid username")
-
 
 del database
 print(f"Logged in as {currentUser}")
@@ -60,10 +59,8 @@ def createuser():
     
     newPasswd = getpass.getpass(f"Password for {newUser}\n> ")
 
-    crypt(crypted,uncrypted,key)
-    with open(uncrypted,"a") as file :
-        file.write(f"\n{newUser}@{newPasswd}")
-    crypt(uncrypted,crypted,key)
+    with open(file,"a") as creatingnewusercoswhynot :
+        creatingnewusercoswhynot.write(f"\n{newUser}@{newPasswd}")
 
     print(f"New user {newUser} successfully created ")
 
@@ -75,10 +72,7 @@ def createuser():
 def admin():
     #allows you to see the decrypted file to lookout for problems
     if currentUser == "admin":
-        crypt(crypted,uncrypted,key)
-        a = input("you admined >")
-        a += ""
-        crypt(uncrypted,crypted,key)
+        a = input("\main\PROIE32>")
     else :
         print("You don't have the permissions to run this command")
 
