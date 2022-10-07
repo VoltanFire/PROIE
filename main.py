@@ -5,8 +5,6 @@ import getpass
 import time
 import sys
 
-
-#var
 file = "database"
 
 #creating dictionary user->passwd and keeping track of users in the file
