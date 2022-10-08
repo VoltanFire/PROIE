@@ -4,7 +4,7 @@ import hashlib
 import getpass
 
 from abc import ABC, abstractmethod
-from main import user_list
+from database import get_database
 
 class Command(ABC):
     @property
@@ -41,8 +41,9 @@ class NewUser(Command):
     name = "useradd"
     def execute(self, *args) -> None:
         username = input("Username: ")
-        while username in user_list or " " in username:
-            if username in user_list:
+        database = get_database()
+        while username in database.keys() or " " in username:
+            if username in database.keys():
                 print(f"Username '{username}' is already taken.")
             elif " " in username:
                 print("The username cannot contain a space.")
@@ -52,8 +53,8 @@ class NewUser(Command):
             print("Passwords do not match.")
 
         hashed_password = hashlib.sha256(user_password.encode("utf8")).hexdigest()
-        with open("database", "a") as database:
-            database.write(f"{username}@{hashed_password}\n")
+        database[username] = {"password": hashed_password}
+        database.save()
 
         print(f"User '{username}' successfully created.")
 
