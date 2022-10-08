@@ -26,9 +26,10 @@ class INeedHelpBecayseIMayOrMayNotSuckHelpMeStepUkuIAmStuckThatIsWhyIAmHere(Comm
 class Penis(Command):
     name = "penis"
     def execute(self, *args) -> None:
-        print("penis cock 8======D")
+        print(f"penis cock 8======D, args: {args}")
 
 
+#TODO go back to login screen after logout, add shutdown/stop command (pabet)
 class Logout(Command):
     name = "logout"
     def execute(self, *args) -> None:
@@ -40,14 +41,12 @@ class Logout(Command):
 class NewUser(Command):
     name = "useradd"
     def execute(self, *args) -> None:
-        username = input("Username: ")
-        database = get_database()
-        while username in database.keys() or " " in username:
-            if username in database.keys():
-                print(f"Username '{username}' is already taken.")
-            elif " " in username:
-                print("The username cannot contain a space.")
-            username = input("Username: ")
+        if len(args) == 0:
+            print("You need to specify an username.")
+            return
+        elif (username := args[0]) in (database := get_database()).keys():
+            print(f"Username '{username}' is already taken.")
+            return
 
         while (user_password := getpass.getpass(f"Password for {username}: ")) != getpass.getpass("Confirm password: "):
             print("Passwords do not match.")

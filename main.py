@@ -23,9 +23,12 @@ print(f"Logged in as '{currentUser}'.")
 
 #main loop
 while True:
-    cmd = input(f"/main/{currentUser} > ")
-    matches = [c for c in Command.__subclasses__() if c().name == cmd]
+    cmd = input(f"/main/{currentUser} > ").split()
+    if len(cmd) == 0:
+        continue
+
+    matches = [c for c in Command.__subclasses__() if c().name == cmd[0]]
     if len(matches) == 0:
         print("No command found? :nobitches: heheheha your mom")
     else:
-        matches[0]().execute() # TODO args
+        matches[0]().execute(*cmd[1:])
