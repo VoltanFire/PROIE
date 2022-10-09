@@ -1,10 +1,13 @@
+# PROIE is a P.R.O.I.E. Inc. property, all rights reserved.
 # uku seal of approval™ :D
-
+# cambouis seal of approval too ;)
+import sys
+from argparse import ArgumentParser
 from getpass import getpass
 from hashlib import sha256
 
 import proie
-from commands import Command
+from commands import Command, Hilfe
 from database import get_database
 
 
@@ -33,7 +36,14 @@ while True:
 
     matches = [c for c in Command.__subclasses__() if c().name == cmd[0]]
     if len(matches) == 0:
-        # TODO show actual help instead of this LOL (heheha)
-        print(f"No '{cmd[0]}' command found? :nobitches:")
-    else:
-        matches[0]().execute(*cmd[1:])
+        matches = [Hilfe]
+
+    command = matches[0]()
+    parser = ArgumentParser(prog=command.name)
+
+    command.update_parser(parser)
+    try:
+        command.execute(parser.parse_args(cmd[1:]))
+    except SystemExit:  # hehehehehehehe
+        if command.name == "shutdown":
+            sys.exit()

@@ -15,7 +15,8 @@ class Database(dict):
 
 DEFAULT_DATABASE = Database({
     "root": {
-        "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+        "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+        "superuser": True  # https://cdn.discordapp.com/emojis/975972095458676756.png
     }  # default password is 'admin'
 })
 
