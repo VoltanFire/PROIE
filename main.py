@@ -33,7 +33,7 @@ while True:
 
     matches = [c for c in Command.__subclasses__() if c().name == cmd[0]]
     if len(matches) == 0:
-        # TODO show actual help instead of this LOL
-        print("No command found? :nobitches: heheheha your mom")
+        # TODO show actual help instead of this LOL (heheha)
+        print(f"No '{cmd[0]}' command found? :nobitches:")
     else:
         matches[0]().execute(*cmd[1:])

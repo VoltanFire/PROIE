@@ -14,9 +14,9 @@ class Database(dict):
 
 
 DEFAULT_DATABASE = Database({
-    "admin": {
-        "password": "4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2"
-    }  # default password is 'root'
+    "root": {
+        "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+    }  # default password is 'admin'
 })
 
 

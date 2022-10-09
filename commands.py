@@ -30,7 +30,11 @@ class Penis(Command):
     name = "penis"
 
     def execute(self, *args) -> None:
-        print(f"penis cock 8======D, args: {args}")
+        if len(args) == 0:
+            print("smol penis ? :nobitches: :-) (smol penis not smiley)")
+            return
+        try : print(f"penis cock 8{'='*int(args[0])}D")
+        except ValueError: print("you didnt put a lenght hehehaha")
 
 
 class Logout(Command):
