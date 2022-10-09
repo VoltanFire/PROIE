@@ -68,5 +68,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Python cache
+__pycache__
+
 ### PROIE stuff
 database.json

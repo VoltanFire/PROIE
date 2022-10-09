@@ -1,10 +1,12 @@
-import time
-import sys
-import hashlib
 import getpass
-
+import hashlib
+import sys
+import time
 from abc import ABC, abstractmethod
+
+import proie
 from database import get_database
+
 
 class Command(ABC):
     @property
@@ -17,29 +19,40 @@ class Command(ABC):
         pass
 
 
-class INeedHelpBecayseIMayOrMayNotSuckHelpMeStepUkuIAmStuckThatIsWhyIAmHere(Command):
+class INeedHelpBecauseIMayOrMayNotSuckHelpMeStepUkuIAmStuckThatIsWhyIAmHere(Command):
     name = "help"
+
     def execute(self, *args) -> None:
         print(f"Available commands: {', '.join([c().name for c in Command.__subclasses__()])}")
 
 
 class Penis(Command):
     name = "penis"
+
     def execute(self, *args) -> None:
         print(f"penis cock 8======D, args: {args}")
 
 
-#TODO go back to login screen after logout, add shutdown/stop command (pabet)
 class Logout(Command):
     name = "logout"
+
     def execute(self, *args) -> None:
-        print("Succesfully logged out.")
+        proie.current_user = None
+        print("Successfully logged out.\n")
+
+
+class Shutdown(Command):
+    name = "shutdown"
+
+    def execute(self, *args) -> None:
+        print("Shutting down...")
         time.sleep(.75)
-        sys.exit(0)
+        sys.exit()
 
 
 class NewUser(Command):
     name = "useradd"
+
     def execute(self, *args) -> None:
         if len(args) == 0:
             print("You need to specify an username.")
@@ -56,4 +69,3 @@ class NewUser(Command):
         database.save()
 
         print(f"User '{username}' successfully created.")
-
